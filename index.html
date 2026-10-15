@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>→ Things</title>
+<style>body{font:17px -apple-system,system-ui,sans-serif;display:flex;min-height:90vh;align-items:center;justify-content:center;background:#1c1c1e;color:#eee;text-align:center}a{color:#4a9eff}</style>
+</head><body><p id="m">Открываю Things…</p>
+<script>
+// Трамплин для кнопок в Telegram: Telegram не открывает ссылки things://, а https — открывает.
+// Ссылка вида https://…/go/#things:///show?id=… — всё после # уходит в Things и на сервер не передаётся.
+// Пускаем только things:/// — чтобы страница не стала редиректом куда угодно.
+var t = decodeURIComponent(location.hash.slice(1));
+var m = document.getElementById("m");
+if (/^things:\/\/\//.test(t)) {
+  location.replace(t);
+  m.innerHTML = 'Если Things не открылся — <a href="' + t.replace(/"/g, "%22") + '">нажми здесь</a>.';
+} else {
+  m.textContent = "Пустая ссылка.";
+}
+</script></body></html>
